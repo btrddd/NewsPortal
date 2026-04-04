@@ -21,3 +21,11 @@ def censor(text: str):
             word = word.replace(_word, _word[0] + '*' * (len(_word)-1))
         censored_text += f' {word}'
     return censored_text
+
+
+@register.simple_tag(takes_context=True)
+def url_replace(context, **kwargs):
+    request = context['request'].GET.copy()
+    for key, value in kwargs.items():
+        request[key] = value
+    return request.urlencode()

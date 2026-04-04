@@ -10,13 +10,7 @@ News feed
 
 {% if posts %}
 <p>Количество публикаций - {{ posts|length }} </p>
-{% else %}
-<p>Публикаций нет!</p>
-{% endif %}
-
 <hr>
-
-{% if posts %}
 <div class="posts">
     {% for post in posts %}
     <div class="post">
@@ -27,6 +21,28 @@ News feed
         {% endfor %}
     </div>
 </div>
+{% else %}
+<p>Публикаций нет!</p>
+{% endif %}
+
+{% if page_obj.has_previous %}
+<a href="?{% url_replace page=1 %}">1</a>
+{% if page_obj.previous_page_number != 1 %}
+...
+<a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+{% endif %}
+{% endif %}
+
+{% if page_obj.has_previous or page_obj.has_next %}
+{{ page_obj.number }}
+{% endif %}
+
+{% if page_obj.has_next %}
+<a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+{% if page_obj.next_page_number != paginator.num_pages %}
+...
+<a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
+{% endif %}
 {% endif %}
 
 {% endblock content %}
