@@ -1,0 +1,24 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Личный кабинет
+{% endblock title %}
+
+{% block header %}
+<h1>Личный кабинет</h1>
+{% endblock header %}
+
+{% block content %}
+<div>
+    Email: {{request.user.email}}<br>
+    Username: {{request.user.username}}<br>
+    Является автором:
+    {% if is_author %}
+    Да
+    {% else %}
+    Нет
+    <button><a href="upgrade/">Стать автором</a></button>
+    {% endif %} <br>
+</div>
+
+{% endblock content %}
