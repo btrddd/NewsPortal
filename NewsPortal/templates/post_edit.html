@@ -4,9 +4,11 @@
 Post
 {% endblock title %}
 
-{% block content %}
+{% block header %}
 <h1>Публикация</h1>
-<hr>
+{% endblock header %}
+
+{% block content %}
 <form action="" , method="post">
     {% csrf_token %}
     {{form.as_p}}

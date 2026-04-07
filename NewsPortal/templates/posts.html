@@ -5,21 +5,26 @@
 News feed
 {% endblock title %}
 
-{% block content %}
+{% block header %}
 <h1>Новостная лента</h1>
-
 {% if posts %}
-<p>Количество публикаций - {{ posts|length }} </p>
-<hr>
+<!-- <p>Количество публикаций - {{ posts|length }} </p> -->
+{% endif %}
+{% endblock header %}
+
+{% block content %}
+{% if posts %}
 <div class="posts">
     {% for post in posts %}
     <div class="post">
-        <h3>{{ post.title|censor }}</h3>
+        <a href="/news/{{post.pk}}">
+            <h3>{{ post.title|censor }}</h3>
+        </a>
         <p>{{ post.date_time|date:'d.m.Y' }}</p>
         <p>{{ post.text|truncatewords:20|censor }}</p>
         <hr>
-        {% endfor %}
     </div>
+    {% endfor %}
 </div>
 {% else %}
 <p>Публикаций нет!</p>

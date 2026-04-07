@@ -4,16 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock title %}</title>
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
     <!-- {% load static %}
     <link rel="stylesheet" href="{% static 'css/navigation.bootstrap.css' %}"> -->
 </head>
 
 <body>
-    <div class="content">
+    <header>
+        <a href="/news">Публикации</a>
+        <a href="/profile">Личный кабинет</a>
+        {% block header %}
+        {% endblock header %}
+        <hr>
+    </header>
+    <main>
         {% block content %}
         {% endblock content %}
-    </div>
+    </main>
 </body>
 
 </html>

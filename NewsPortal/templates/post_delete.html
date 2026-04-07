@@ -4,9 +4,11 @@
 Post Delete
 {% endblock title %}
 
-{% block content %}
+{% block header %}
 <h1>Удаление публикации</h1>
-<hr>
+{% endblock header %}
+
+{% block content %}
 <form action="" , method="post">
     {% csrf_token %}
     <p>Удалить публикацию "{{ object.title }}"?</p>
