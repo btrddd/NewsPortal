@@ -24,5 +24,5 @@ urlpatterns = [
     path('', RedirectView.as_view(url='news/', permanent=False)),
     path('news/', include('news_feed.urls')),
     path('accounts/', include('allauth.urls')),
-    path('profile/', include('sign.urls'))
+    path('profile/', include('sign.urls'), name='profile')
 ]

@@ -10,15 +10,32 @@
 
 {% block content %}
 <div>
-    Email: {{request.user.email}}<br>
-    Username: {{request.user.username}}<br>
-    Является автором:
-    {% if is_author %}
-    Да
-    {% else %}
-    Нет
-    <button><a href="upgrade/">Стать автором</a></button>
-    {% endif %} <br>
+    <div>
+        Email: {{request.user.email}}<br>
+        Username: {{request.user.username}}<br>
+        Является автором:
+        {% if is_author %}
+        Да
+        {% else %}
+        Нет
+        <button><a href="upgrade/">Стать автором</a></button>
+        {% endif %} <br>
+    </div>
+    <div>
+        <hr>
+        <h4>Подписки</h4>
+        <ul>
+            {% for subscription in category_subscriptions %}
+            <form action="{% url 'category_unsubscribe' subscription.pk %}" method="post">
+                {% csrf_token %}
+                <li>{{ subscription.category }} <input type="submit" value="Отписаться"> </li>
+            </form>
+            {% empty %}
+            <li>Нет активных подписок</li>
+            {% endfor %}
+        </ul>
+        <button><a href="subscribe/">Добавить подписку</a></button>
+    </div>
 </div>
 
 {% endblock content %}
