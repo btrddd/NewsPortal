@@ -29,6 +29,7 @@ class Category(models.Model):
 
 
 class Post(models.Model):
+    POST_LIMIT = 3
     article = 'AR'
     news = 'NE'
 

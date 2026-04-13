@@ -44,13 +44,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
-    'news_feed',
+    'news_feed.apps.NewsFeedConfig',
     'django_filters',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.yandex',
+    'django_apscheduler',
 ]
 
 SITE_ID = 1
@@ -127,7 +128,8 @@ SOCIALACCOUNT_PROVIDERS = {
 
 ACCOUNT_LOGIN_METHODS = {'email'}
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2']
 ACCOUNT_FORMS = {'signup': 'sign.forms.CommonSignupForm'}
 
@@ -170,11 +172,18 @@ STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
+
 # Email
 
-EMAIL_FROM = 'btrdddd@yandex.ru'
+DEFAULT_FROM_EMAIL = 'btrdddd@yandex.ru'
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'btrdddd'
 EMAIL_HOST_PASSWORD = config['EMAIL_HOST_PASSWORD']
 EMAIL_USE_SSL = True
+
+
+# Apscheduler
+
+APSCHEDULER_DATETIME_FORMAT = 'N j, Y. f:s a'
+APSCHEDULER_RUN_NOW_TIMEOUT = 10
