@@ -16,7 +16,7 @@ from NewsPortal.settings import DEFAULT_FROM_EMAIL
 class PostList(ListView):
     model = Post
     ordering = '-date_time'
-    template_name = 'posts.html'
+    template_name = 'post/posts.html'
     context_object_name = 'posts'
     paginate_by = 10
 
@@ -34,7 +34,7 @@ class PostList(ListView):
 
 class PostDetail(DetailView):
     model = Post
-    template_name = 'post.html'
+    template_name = 'post/post.html'
     context_object_name = 'post'
 
 
@@ -42,7 +42,7 @@ class PostCreate(PermissionRequiredMixin, CreateView):
     permission_required = ('news_feed.add_post')
     model = Post
     form_class = PostForm
-    template_name = 'post_edit.html'
+    template_name = 'post/post_edit.html'
 
 
     def send_mail(self, post: Post):
@@ -59,7 +59,7 @@ class PostCreate(PermissionRequiredMixin, CreateView):
         
         for subscriber in subscribers:
             html_content = render_to_string(
-                'post_email_message.html',
+                'post/post_email_message.html',
                 {
                     'post': post,
                     'username': subscriber[0],
@@ -109,15 +109,15 @@ class PostUpdate(PermissionRequiredMixin, UpdateView):
     permission_required = ('news_feed.change_post')
     model = Post
     form_class = PostForm
-    template_name = 'post_edit.html'
+    template_name = 'post/post_edit.html'
 
 
 class PostDelete(PermissionRequiredMixin, DeleteView):
     permission_required = ('news_feed.delete_post')
     model = Post
-    template_name = 'post_delete.html'
+    template_name = 'post/post_delete.html'
     success_url = reverse_lazy('post_list')
 
 
 class PostSearch(PostList):
-    template_name = 'post_search.html'
+    template_name = 'post/post_search.html'

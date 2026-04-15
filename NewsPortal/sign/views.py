@@ -34,7 +34,7 @@ def upgrade_profile(request):
 class CategorySubscribe(LoginRequiredMixin, CreateView):
     model = CategorySubscribers
     form_class = CategorySubscribeForm
-    template_name = 'category_subscribe.html'
+    template_name = 'account/category_subscribe.html'
     success_url = reverse_lazy('profile')
 
     def form_valid(self, form):
