@@ -1,0 +1,17 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Post Search
+{% endblock title %}
+
+{% block header %}
+<h3>Поиск публикаций</h3>
+{% endblock header %}
+
+{% block content %}
+<form action="{% url 'post_list' %}" method="get">
+    {{filterset.form.as_p}}
+    <input type="submit" value="Найти">
+</form>
+<hr>
+{% endblock content %}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Здравствуй, {{ username }}! Свежая
+        {% if post.post_type == 'NE' %}
+        новость
+        {% elif post.post_type == 'AR' %}
+        статья
+        {% else %}
+        публикация
+        {% endif %}
+        в твоей любимой категории "{{ category }}"!
+    </h1>
+    <p>{{ post.text|truncatewords:20 }} <a href="http://127.0.0.1:8000/news/{{ post.pk }}">читать далее</a></p>
+</body>
+
+</html>
