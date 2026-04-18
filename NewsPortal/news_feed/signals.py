@@ -8,10 +8,11 @@ from datetime import date
 
 from NewsPortal.settings import DEFAULT_FROM_EMAIL
 from .models import Post, Category
+from .tasks import post_email_message
 
 
 @receiver(signal=m2m_changed, sender=Post.category.through)
-def post_email_message(sender, instance: Post, action, **kwargs):
+def new_post_email_message(sender, instance: Post, action, **kwargs):
     if action != 'post_add':
         return
     
@@ -22,24 +23,7 @@ def post_email_message(sender, instance: Post, action, **kwargs):
             set(category.subscribers.values_list('username', 'email'))
         )
     
-    for subscriber in subscribers:
-        html_content = render_to_string(
-            'post/post_email_message.html',
-            {
-                'post': instance,
-                'username': subscriber[0],
-            }
-        )
-
-        message = EmailMultiAlternatives(
-            subject=instance.title,
-            body=instance.text,
-            from_email=DEFAULT_FROM_EMAIL,
-            to=[subscriber[1]]
-        )
-
-        message.attach_alternative(html_content, 'text/html')
-        message.send()
+    post_email_message.apply_async([list(subscribers), instance.pk, category.category_name])
     
 
 @receiver(signal=pre_save, sender=Post)

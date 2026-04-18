@@ -63,6 +63,7 @@ class PostCreate(PermissionRequiredMixin, CreateView):
                 {
                     'post': post,
                     'username': subscriber[0],
+                    'category': category.category_name,
                 }
             )
 
