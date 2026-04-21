@@ -19,6 +19,10 @@ class Author(models.Model):
 
     def __str__(self):
         return f'{self.user}'
+    
+    @property
+    def post_count(self):
+        return len(Post.objects.filter(author=self))
 
 
 class Category(models.Model):
@@ -27,6 +31,10 @@ class Category(models.Model):
 
     def __str__(self):
         return f'{self.category_name}'
+    
+    @property
+    def post_count(self):
+        return len(Post.objects.filter(category=self))
 
 
 class Post(models.Model):
