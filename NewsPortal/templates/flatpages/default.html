@@ -13,6 +13,8 @@
 </head>
 
 <body>
+    {% load cache %}
+    {% cache 300 header %}
     <header>
         <a href="/news">Публикации</a>
         <a href="/profile">Личный кабинет</a>
@@ -20,6 +22,7 @@
         {% endblock header %}
         <hr>
     </header>
+    {% endcache %}
     <main>
         {% block content %}
         {% endblock content %}

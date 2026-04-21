@@ -1,4 +1,6 @@
 from django.urls import path
+
+
 from .views import (PostList, PostDetail, NewsCreate, 
     ArticleCreate, PostUpdate, PostDelete, PostSearch)
 
